@@ -3,19 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dominyko ir Eivydos vestuvių darbai</title>
+    <title>Dominyko ir Eivydos vestuvės</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
         <h1>Dominyko ir Eivydos vestuvės</h1>
+        <div class="auth-section">
+            <button id="signInButton" onclick="signIn()">Prisijungti</button>
+            <button id="signOutButton" onclick="signOut()" style="display: none;">Atsijungti</button>
+            <span id="userStatus"></span>
+        </div>
         <div class="input-section">
             <input type="text" id="taskInput" placeholder="Add a wedding task (e.g., Book Florist)">
             <button onclick="addTask()">Pridėti užduotį</button>
         </div>
         <div id="taskList"></div>
     </div>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
