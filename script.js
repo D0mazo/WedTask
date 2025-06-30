@@ -1,14 +1,3 @@
-// Firebase configuration
-const firebaseConfig = {
-    apiKey: "AIzaSyDvr2aUrH6x4jyvg8igh-mevoutSuCUOQU",
-    authDomain: "wedtask.firebaseapp.com",
-    projectId: "wedtask",
-    storageBucket: "wedtask.firebasestorage.app",
-    messagingSenderId: "414444588034",
-    appId: "1:414444588034:web:a20245fa15ec5834656b1b",
-    measurementId: "G-NWCNMVWZC2"
-};
-
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
@@ -19,12 +8,14 @@ function signIn() {
     const provider = new firebase.auth.GoogleAuthProvider();
     auth.signInWithPopup(provider).catch(error => {
         console.error("Sign-in error:", error);
+        alert("Sign-in failed: " + error.message);
     });
 }
 
 function signOut() {
     auth.signOut().catch(error => {
         console.error("Sign-out error:", error);
+        alert("Sign-out failed: " + error.message);
     });
 }
 
@@ -62,6 +53,7 @@ function addTask() {
         taskInput.value = '';
     }).catch(error => {
         console.error("Error adding task:", error);
+        alert("Failed to add task: " + error.message);
     });
 }
 
@@ -69,6 +61,7 @@ function deleteTask(id) {
     const userId = auth.currentUser.uid;
     db.collection('users').doc(userId).collection('tasks').doc(id).delete().catch(error => {
         console.error("Error deleting task:", error);
+        alert("Failed to delete task: " + error.message);
     });
 }
 
@@ -78,6 +71,7 @@ function updateNotes(id, notes) {
         notes: notes
     }).catch(error => {
         console.error("Error updating notes:", error);
+        alert("Failed to update notes: " + error.message);
     });
 }
 
@@ -131,10 +125,11 @@ function loadTasks(userId) {
             const tasks = [];
             snapshot.forEach(doc => {
                 tasks.push({ id: doc.id, ...doc.data() });
-           \
+            });
             renderTasks(tasks);
         }, error => {
             console.error("Error loading tasks:", error);
+            alert("Failed to load tasks: " + error.message);
         });
     setInterval(updateTimeDisplays, 1000);
 }
